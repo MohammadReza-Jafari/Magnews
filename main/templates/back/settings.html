@@ -1,0 +1,120 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+{% block mainblock %}
+	<!-- Page content -->
+	<div id="page-content">
+		<!-- Datatables Header -->
+		<div class="content-header">
+			<div class="header-section">
+				<h1>
+					<i class="fa fa-table"></i>Add News<br><small>Add news ...!</small>
+				</h1>
+			</div>
+		</div>
+		<ul class="breadcrumb breadcrumb-top">
+			<li>News</li>
+			<li><a href="{% url 'add_news' %}">Add</a></li>
+		</ul>
+		<!-- END Datatables Header -->
+
+		<!-- Basic Form Elements Block -->
+		<div class="block">
+			<!-- Basic Form Elements Title -->
+			<div class="block-title">
+				<div class="block-options pull-right">
+					<a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
+				</div>
+				<h2><strong>Add</strong> News</h2>
+			</div>
+			<!-- END Form Elements Title -->
+
+			{% if errors %}
+				{% for error in errors %}
+					<h5 class="text-danger col-md-offset-1" style="font-weight: bold">* {{ error }}</h5>
+				{% endfor %}
+				<br>
+			{% endif %}
+
+			<!-- Basic Form Elements Content -->
+			<form action="{% url 'site_setting' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+				{% if error %}
+					<div class="col-md-offset-1">
+						<h5 class="text-danger" style="font-weight: bold; padding-top: 10px">* {{ error }}</h5>
+					</div>
+				{% endif %}
+				{% csrf_token %}
+				<div class="form-group">
+					<label class="col-md-1 control-label" style="text-align: left">Name</label>
+					<div class="col-md-4">
+						<input id="name" name="name" type="text" class="form-control" placeholder="Name" value="{{ setting.name }}">
+					</div>
+					<label class="col-md-offset-1 col-md-1 control-label" style="text-align: left">Set Name</label>
+					<div class="col-md-4">
+						<input id="set_name" name="set_name" type="text" class="form-control" placeholder="Name" value="{{ setting.set_name }}">
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-1 control-label" style="text-align: left">Phone Number</label>
+					<div class="col-md-4">
+						<input id="phone_number" name="phone_number" type="text" class="form-control" placeholder="Phone Number" value="{{ setting.phone_number }}">
+					</div>
+					<label class="col-md-offset-1 col-md-1 control-label" style="text-align: left">Relation Link</label>
+					<div class="col-md-4">
+						<input id="link" name="link" type="text" class="form-control" placeholder="Relation Link" value="{{ setting.link }}">
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-1 control-label" style="text-align: left">Youtube</label>
+					<div class="col-md-4">
+						<input id="youtube" name="youtube" type="text" class="form-control" placeholder="Youtube" value="{{ setting.youtube }}">
+					</div>
+					<label class="col-md-offset-1 col-md-1 control-label" style="text-align: left">twitter</label>
+					<div class="col-md-4">
+						<input id="twitter" name="twitter" type="text" class="form-control" placeholder="Name" value="{{ setting.twitter }}">
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-1 control-label" style="text-align: left">Facebook</label>
+					<div class="col-md-4">
+						<input id="facebook" name="facebook" type="text" class="form-control" placeholder="Facebook" value="{{ setting.facebook }}">
+					</div>
+				</div>
+
+				<!--ck editor -->
+				<div class="form-group">
+					<label class="control-label col-md-1" style="text-align: left">About</label>
+					<div class="col-md-10">
+						<textarea id="about" name="about" class="ckeditor">{{ setting.about }}</textarea>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+				<!-- end of ck editor -->
+				<div class="form-group form-actions">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<button type="submit" class="btn btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+						<a href="{% url 'site_setting' %}" class="btn btn-warning"><i class="fa fa-repeat"></i> Reset</a>
+					</div>
+				</div>
+			</form>
+			<!-- END Basic Form Elements Content -->
+		</div>
+	</div>
+	<!-- END Page Content -->
+{% endblock %}
+
+{% block footerblock %}
+	<!-- Load and execute javascript code used only in this page -->
+	<script src="{% static 'back/js/pages/formsGeneral.j' %}s"></script>
+	<script>$(function(){ FormsGeneral.init(); });</script>
+	<!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
+	<script src="{% static 'back/js/helpers/ckeditor/ckeditor.js' %}"></script>
+{% endblock %}

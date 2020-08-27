@@ -1,0 +1,110 @@
+{% extends 'back/master.html' %}
+
+{% load static %}
+
+{% block mainblock %}
+	<!-- Page content -->
+	<div id="page-content">
+		<!-- Datatables Header -->
+		<div class="content-header">
+			<div class="header-section">
+				<h1>
+					<i class="fa fa-table"></i>Edit News<br><small>Edit news ...!</small>
+				</h1>
+			</div>
+		</div>
+		<ul class="breadcrumb breadcrumb-top">
+			<li>News</li>
+			<li><a href="{% url 'edit_news' pk=news.pk %}">Edit</a></li>
+		</ul>
+		<!-- END Datatables Header -->
+
+		<!-- Basic Form Elements Block -->
+		<div class="block">
+			<!-- Basic Form Elements Title -->
+			<div class="block-title">
+				<div class="block-options pull-right">
+					<a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
+				</div>
+				<h2><strong>Add</strong> News</h2>
+			</div>
+			<!-- END Form Elements Title -->
+
+			{% if errors %}
+				{% for error in errors %}
+					<h5 class="text-danger col-md-offset-1" style="font-weight: bold">* {{ error }}</h5>
+				{% endfor %}
+				<br>
+			{% endif %}
+
+			<!-- Basic Form Elements Content -->
+			<form action="{% url 'edit_news' pk=news.pk %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+				{% csrf_token %}
+				<div class="form-group">
+					<label class="col-md-1 control-label">Title</label>
+					<div class="col-md-4">
+						<input id="title" name="title" value="{{ news.title }}" type="text" class="form-control" placeholder="Title">
+					</div>
+					<label class="col-md-1 control-label">Subcategory</label>
+					<div class="col-md-5">
+						<select id="selected_category" name="selected_subcategory" class="select-chosen" data-placeholder="Choose a Category.." style="width: 250px;">
+							<option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+							{% for subcategory in subcategories %}
+								<option value="{{ subcategory.pk }}"
+										{% if news.subcategory.pk == subcategory.pk %}
+											selected
+										{% endif %} >
+									{{ subcategory.category.title }} | {{ subcategory.title }}
+								</option>
+							{% endfor %}
+
+						</select>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label" for="example-file-input">File input</label>
+					<div class="col-md-4">
+						<input type="file" id="image" name="image">
+					</div>
+					<label class="col-md-1 control-label" for="example-file-input">Old Picture</label>
+					<div class="col-md-5">
+						<img src="{{ news.image.url }}" width="250px" height="250px" class="img-rounded">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label" for="example-email-input">Summary</label>
+					<div class="col-md-10">
+						<textarea rows="5" id="description" name="description" class="form-control" placeholder="Description">{{ news.description }}</textarea>
+					</div>
+				</div>
+				<!--ck editor -->
+				<div class="form-group">
+					<label class="control-label col-md-1">News Body</label>
+					<div class="col-md-10">
+						<textarea id="body" name="body" class="ckeditor">{{ news.body }}</textarea>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+				<!-- end of ck editor -->
+				<div class="form-group form-actions">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<button type="submit" class="btn btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+						<a href="{% url 'add_news' %}" class="btn btn-warning"><i class="fa fa-repeat"></i> Reset</a>
+					</div>
+				</div>
+			</form>
+			<!-- END Basic Form Elements Content -->
+		</div>
+	</div>
+	<!-- END Page Content -->
+{% endblock %}
+
+{% block footerblock %}
+	<!-- Load and execute javascript code used only in this page -->
+	<script src="{% static 'back/js/pages/formsGeneral.j' %}s"></script>
+	<script>$(function(){ FormsGeneral.init(); });</script>
+	<!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
+	<script src="{% static 'back/js/helpers/ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
