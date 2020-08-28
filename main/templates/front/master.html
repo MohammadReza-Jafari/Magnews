@@ -287,13 +287,13 @@
 																	<div class="col-3">
 																			<!-- Item post -->
 																			<div>
-																				<a href="{% url 'news_details' title=news.title %}" class="wrap-pic-w hov1 trans-03">
+																				<a href="{% url 'news:details' title=news.title %}" class="wrap-pic-w hov1 trans-03">
 																					<img src="{{ news.image.url }}" alt="IMG">
 																				</a>
 
 																				<div class="p-t-10">
 																					<h5 class="p-b-5">
-																						<a href="{% url 'news_details' title=news.title %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+																						<a href="{% url 'news:details' title=news.title %}" class="f1-s-5 cl3 hov-cl10 trans-03">
 																							{{ news.title }}
 																						</a>
 																					</h5>
@@ -327,13 +327,13 @@
 																<div class="col-3">
 																	<!-- Item post -->
 																	<div>
-																		<a href="{% url 'news_details' title=news.title %}" class="wrap-pic-w hov1 trans-03">
+																		<a href="{% url 'news:details' title=news.title %}" class="wrap-pic-w hov1 trans-03">
 																			<img src="{{ news.image.url }}" alt="IMG">
 																		</a>
 
 																		<div class="p-t-10">
 																			<h5 class="p-b-5">
-																				<a href="{% url 'news_details' title=news.title %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+																				<a href="{% url 'news:details' title=news.title %}" class="f1-s-5 cl3 hov-cl10 trans-03">
 																					{{ news.title }}
 																				</a>
 																			</h5>

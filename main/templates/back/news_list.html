@@ -45,7 +45,7 @@
 					{% for news in news_list %}
 						<tr>
 							<td class="text-center">{{ news.pk }}</td>
-							<td class="text-center"><a href="{% url 'news_details' title=news.title %}"><img src="{{ news.image.url }}" alt="avatar" class="img-circle" width="80px" height="80px"></a></td>
+							<td class="text-center"><a href="{% url 'news:details' title=news.title %}"><img src="{{ news.image.url }}" alt="avatar" class="img-circle" width="80px" height="80px"></a></td>
 							<td class="text-center">{{ news.title }}</td>
 							<td class="text-center">{{ news.author }}</td>
 							<td class="text-center">{{ news.subcategory.title }}</td>
@@ -53,8 +53,8 @@
 							<td class="text-center">{{ news.created_date|to_jalali:'%Y/%m/%d'}}</td>
 							<td class="text-center" >
 								<div class="btn-group">
-									<a href="{% url 'edit_news' pk=news.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i></a>
-									<a href="{% url 'delete_news' pk=news.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+									<a href="{% url 'news:edit' pk=news.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i></a>
+									<a href="{% url 'news:delete' pk=news.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
 								</div>
 							</td>
 						</tr>

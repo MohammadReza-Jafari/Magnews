@@ -28,3 +28,4 @@ def add_category(request):
         category.save()
         return redirect('category_list')
     return render(request, 'back/add_category.html')
+

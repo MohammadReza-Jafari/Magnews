@@ -63,7 +63,7 @@ def add_news(request):
         category = news.subcategory.category
         category.count += 1
         category.save()
-        return redirect('news_list')
+        return redirect('news:list')
     return render(request, 'back/add_news.html', {'subcategories': subcategories})
 
 
@@ -77,7 +77,7 @@ def delete_news(request, pk):
     category.count -= 1
     category.save()
     news.delete()
-    return redirect('news_list')
+    return redirect('news:list')
 
 
 @login_required()
@@ -121,5 +121,5 @@ def edit_news(request, pk):
             }
         )
         news.save()
-        return redirect('news_list')
+        return redirect('news:list')
     return render(request, 'back/edit_news.html', {'news': news, 'subcategories': subcategories})
